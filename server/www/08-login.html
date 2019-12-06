@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>login</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <span v-if="useName">
+    <label for="username">用户账号</label>
+    <input key="username" type="text" id="username" name="username" placeholder="用户账号">
+  </span>
+  <span v-else>
+    <label for="email">用户邮箱</label>
+    <input key="email" type="text" id="email" name="email" placeholder="用户邮箱">
+  </span>
+  <button @click="useName = ! useName">切换</button>
+  <br>
+  <span v-show="useName">
+    <label for="username">用户账号</label>
+    <input key="username" type="text" id="username" name="username" placeholder="用户账号">
+  </span>
+  <span v-show="!useName">
+    <label for="email">用户邮箱</label>
+    <input key="email" type="text" id="email" name="email" placeholder="用户邮箱">
+  </span>
+  <button @click="useName = ! useName">切换</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const vue = new Vue({
+    el: "#app",
+    data: {
+      useName: true
+    }
+  })
+</script>
+</body>
+</html>

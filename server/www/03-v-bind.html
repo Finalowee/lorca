@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>v-once</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+    .radix {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <a v-bind:href="href">百度一下</a>
+  <a :href="href">百度一下</a><br>
+  <div :class="{radix: isActive}">地对地导弹</div>
+  <div :class="active()">地对地导弹</div>
+  <div :class="['radix', 'radix2']">地对地导弹</div>
+  <div :style="{fontSize: '50px'}">地对地导弹</div>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  const vue = new Vue({
+    el: "#app",
+    data: {
+      title: "测试工具",
+      href: "https://www.baidu.com",
+      isActive: false
+    },
+    methods: {
+      // isActive: function () {
+      //   this.isActive = true
+      // },
+      active: function () {
+        return {radix: true}
+      }
+    }
+  })
+</script>
+</body>
+</html>
