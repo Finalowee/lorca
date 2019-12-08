@@ -7,12 +7,19 @@
     [v-cloak] {
       display: none;
     }
+    .active  {
+      color: red;
+    }
   </style>
 </head>
 <body>
 <div id="app" v-cloak>
-  <ul @click="select">
-    <li v-for="b in books">《{{b.name}}》 (￥{{b.price}})</li>
+  <ul>
+    <li v-for="(b, idx) in books" 
+      :class="{active: idx == current}"
+      @click="select(idx)">
+      <span>《{{b.name}}》 (￥{{b.price}})</span>
+    </li>
   </ul>
 </div>
 <script src="../js/vue.js"></script>
@@ -20,7 +27,7 @@
   const vue = new Vue({
     el: "#app",
     data: {
-      counter: 0,
+      current: 0,
       books: [
         {id:1, name:"Unix编程艺术", price:119},
         {id:2, name:"代码大全", price: 105},
@@ -29,8 +36,10 @@
       ]
     },
     methods: {
-      select(ev) {
-        console.log(ev.target)
+      select(idx) {
+        console.log(idx)
+        this.current = idx
+        return true;
       }
     },
   })

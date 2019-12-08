@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>v-on</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="app" v-cloak>
+  <div v-if="books.length">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>书籍名称</th>
+          <th>出版日期</th>
+          <th>单价</th>
+          <th>购买数量</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(b, idx) in books">
+          <td>{{b.id}}</td>
+          <td>{{b.name}}</td>
+          <td>{{b.date}}</td>
+          <td>{{b.price | showPrice}}</td>
+          <td>
+            <button @click="incr(b)">+</button>
+            {{b.cnt}}
+            <button @click="decr(b)"
+              v-bind:disabled="b.cnt<=1">-</button>
+          </td>
+          <td><button @click="remove(idx)">移除</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>总价格:{{totalPrice | showPrice}}</h3>
+  </div>
+  <div v-else>购物车为空</div>
+</div>
+<script src="../js/vue.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

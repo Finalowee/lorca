@@ -1,24 +1,24 @@
 package main
 
 import (
-	`log`
-	`os`
-	`os/signal`
-	`runtime`
-	`syscall`
+	"log"
+	"os"
+	"os/signal"
+	"runtime"
+	"syscall"
 
-	`github.com/zserge/lorca`
+	"github.com/zserge/lorca"
 
-	`supersdk.supersdk.cn/server`
+	"supersdk.supersdk.cn/server"
 )
 
 func GetSystemMetrics(nIndex int) int {
-    ret, _, _ := syscall.NewLazyDLL(`User32.dll`).NewProc(`GetSystemMetrics`).Call(uintptr(nIndex))
-    return int(ret)
+	ret, _, _ := syscall.NewLazyDLL(`User32.dll`).NewProc(`GetSystemMetrics`).Call(uintptr(nIndex))
+	return int(ret)
 }
 
 func main() {
-    args := make([]string, 0)
+	args := make([]string, 0)
 	if runtime.GOOS == "linux" {
 		args = append(args, "--class=Lorca")
 	}
@@ -34,7 +34,7 @@ func main() {
 	// You may also use `data:text/html,<base64>` approach to load initial HTML,
 	// e.g: ui.Load("data:text/html," + url.PathEscape(html))
 
-	err = ui.Load(server.WS.Run("F:/golang/supersdk.supersdk.cn/server/www", 8080))
+	err = ui.Load(server.WS.Run("D:/go-project/lorca/server/www", 8080))
 	if err != nil {
 		log.Fatal(err)
 	}
