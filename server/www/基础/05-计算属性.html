@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>计算属性</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <h2>{{firstName + ' ' + lastName}}</h2>
+  <h2>{{firstName}} {{lastName}}</h2>
+  <h2>{{getFullName()}}</h2>
+  <h2>{{fullName}}</h2>
+  <h2>{{fullName2}}</h2>
+  <hr>
+  <h2>总价格: {{totalPrice}}</h2>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const vue = new Vue({
+    el: "#app",
+    data: {
+      firstName: "柳",
+      lastName: "夕颜",
+      books: [
+        {id:1, name:"Unix编程艺术", price:119},
+        {id:2, name:"代码大全", price: 105},
+        {id:3, name:"深入理解计算机原理", price: 98},
+        {id:4, name:"现代操作系统", price: 87},
+      ]
+    },
+    methods: {
+      getFullName: function () {
+        return this.firstName + ' ' + this.lastName
+      }
+    },
+    computed: {
+      fullName: function() {
+        return this.firstName + ' ' + this.lastName
+      },
+      fullName2: {
+        get: function() {
+          return this.firstName + this.lastName
+        },
+        set: function(newVal) {
+          // return newVal
+        }
+      },
+      totalPrice: function() {
+        return this.books.reduce((p, e)=> p + e.price, 0);
+      }
+    }
+  })
+</script>
+</body>
+</html>

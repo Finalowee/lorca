@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
     <title>父组件->子组件</title>
@@ -20,7 +20,14 @@
 <script>
     const c1 = {
         template: '#c1',
-        props: ['cmovies']
+        // props: ['cmovies']
+        props: {
+            // cmovies: Array,
+            cmovies: {
+                type: Array,
+                default: []
+            }
+        }
     }
     const app = new Vue({
         el: '#app',

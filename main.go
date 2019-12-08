@@ -9,7 +9,7 @@ import (
 
 	"github.com/zserge/lorca"
 
-	"supersdk.supersdk.cn/server"
+	"lorca/server"
 )
 
 func GetSystemMetrics(nIndex int) int {

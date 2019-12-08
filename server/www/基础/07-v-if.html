@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <title>v-if</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div id="app" v-cloak>
+  <div v-if="!isTotal">
+    <ul @click="select">
+      <li v-for="b in books">《{{b.name}}》 (￥{{b.price}})</li>
+    </ul>
+  </div>
+  <div v-else>
+    <h1>{{totalPrice}}</h1>
+  </div>
+</div>
+<script src="../js/vue.js"></script>
+<script>
+  const vue = new Vue({
+    el: "#app",
+    data: {
+      isTotal: false,
+      books: [
+        {id:1, name:"Unix编程艺术", price:119},
+        {id:2, name:"代码大全", price: 105},
+        {id:3, name:"深入理解计算机原理", price: 98},
+        {id:4, name:"现代操作系统", price: 87},
+      ]
+    },
+    computed: {
+      totalPrice () {
+        return this.books.reduce((p, e)=> p + e.price, 0);
+      }
+    },
+    methods: {
+      select(ev) {
+        console.log(ev.target)
+      }
+    },
+  })
+</script>
+</body>
+</html>

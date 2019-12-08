@@ -1,4 +1,4 @@
-module supersdk.supersdk.cn
+module lorca
 
 go 1.13
 
