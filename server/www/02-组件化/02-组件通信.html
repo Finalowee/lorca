@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父组件->子组件</title>
+</head>
+<body>
+<div id="app">
+    <c1 :cmovies="movies"></c1>
+    <c2 :c-info="info"></c2>
+</div>
+
+<template id="c1">
+    <div>
+        <ul>
+            <li v-for="m in cmovies">{{m}}</li>
+        </ul>
+    </div>
+</template>
+
+<template id="c2">
+    <div>
+        <ul>
+            <li v-for="(val, idx) in cInfo">{{idx}}: {{val}}</li>
+        </ul>
+    </div>
+</template>
+
+<script src="../js/vue.js"></script>
+<script>
+    const c1 = {
+        template: '#c1',
+        // props: ['cmovies']
+        props: {
+            // cmovies: Array,
+            cmovies: {
+                type: Array,
+                default: []
+            }
+        }
+    }
+    const c2 = {
+        template: '#c2',
+        // props: ['cmovies']
+        props: {
+            // cmovies: Array,
+            cInfo: {
+                type: Object,
+                default: []
+            }
+        }
+    }
+    const app = new Vue({
+        el: '#app',
+        data: {
+            movies: ['海王', '海贼王', '海尔兄弟'],
+            info: {
+                name: "lee",
+                age: 19,
+                gender: "female",
+            }
+        },
+        components: {
+            c1,
+            c2,
+        }
+    })
+</script>
+</body>
+</html>

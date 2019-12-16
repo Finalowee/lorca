@@ -30,20 +30,17 @@ func main() {
 		err = ui.Close()
 	}()
 
-	// Load HTML.
-	// You may also use `data:text/html,<base64>` approach to load initial HTML,
-	// e.g: ui.Load("data:text/html," + url.PathEscape(html))
-
-	err = ui.Load(server.WS.Run("D:/go-project/lorca/server/www", 8080))
+	// 将 server 目录启动为静态服务器
+	err = ui.Load(server.WS.Run("./www", 8080))
 	if err != nil {
 		log.Fatal(err)
 	}
-	// Wait until the interrupt signal arrives or browser window is closed
+	// 等待结束
 	sigC := make(chan os.Signal)
 	signal.Notify(sigC, os.Interrupt)
 	select {
-	case <-sigC:
-	case <-ui.Done():
+		case <-sigC:
+		case <-ui.Done():
 	}
 	log.Println("exiting...")
 }

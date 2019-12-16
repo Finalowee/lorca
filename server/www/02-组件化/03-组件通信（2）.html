@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>父组件<-子组件</title>
+</head>
+<body>
+<div id="app">
+    <c1 @item-click="c1Click"></c1>
+</div>
+
+<template id="c1">
+    <div>
+        <button
+            @click="itemClick(m.id)"
+            v-for="m in categories">
+            {{m.name}}
+        </button>
+    </div>
+</template>
+
+
+<script src="../js/vue.js"></script>
+<script>
+    const c1 = {
+        template: '#c1',
+        data() {
+          return {
+              categories: [
+                  {id:1, name:"热门推荐"},
+                  {id:2, name:"手机数码"},
+                  {id:3, name:"家用电器"},
+                  {id:4, name:"计生用品"},
+              ],
+          }
+        },
+        methods: {
+            itemClick(id) {
+                this.$emit('item-click', id)
+            }
+        }
+    }
+    const app = new Vue({
+        el: '#app',
+        data: {
+            movies: ['海王', '海贼王', '海尔兄弟'],
+        },
+        methods: {
+            c1Click(id) {
+                console.log(id)
+            },
+        },
+        components: {
+            c1,
+        }
+    })
+</script>
+</body>
+</html>
