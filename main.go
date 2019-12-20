@@ -22,7 +22,7 @@ func main() {
 	if runtime.GOOS == "linux" {
 		args = append(args, "--class=Lorca")
 	}
-	ui, err := lorca.New("", "", GetSystemMetrics(0), GetSystemMetrics(1), args...)
+	ui, err := lorca.New("", "", GetSystemMetrics(0)/2, GetSystemMetrics(1)/2, args...)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func main() {
 	}()
 
 	// 将 server 目录启动为静态服务器
-	err = ui.Load(server.WS.Run("./www", 8080))
+	err = ui.Load(server.WS.Run("./server/www", 8080))
 	if err != nil {
 		log.Fatal(err)
 	}

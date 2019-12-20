@@ -4,7 +4,7 @@ const {add, mul} = require('./js/tool.js')
 import less from './css/special.less'
 
 import Vue from 'vue'
-import App from 'components/app.vue'
+import App from './components/app.vue'
 
 new Vue({
     el: '#app',

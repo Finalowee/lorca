@@ -1,11 +1,14 @@
 const path = require('path')
+const webpack = require('webpack')
+const htmlWebpack = require('html-webpack-plugin')
+const gulifyjsWebpack = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	entry: './src/index.js',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
-		publicPath: 'dist/',
+		// publicPath: 'dist/',
 	},
 	module: {
 		rules: [
@@ -54,7 +57,11 @@ module.exports = {
 			{
 				test: /\.vue$/,
 				// use: ['css-loader', 'style-loader']
-				use: ['vue-loader']
+				use: [
+					{
+						loader:'vue-loader',
+					},
+				],
 			},
 		]
 	},
@@ -62,5 +69,12 @@ module.exports = {
 		alias: {
 			'vue$': 'vue/dist/vue.esm.js' // 用 webpack 1 时需用 'vue/dist/vue.common.js'
 		}
-	}
+	},
+	plugins: [
+		// new webpack.BannerPlugin('版权归胖子所有'),
+		new htmlWebpack({
+			template: './template.html',
+		}),
+		new gulifyjsWebpack(),
+	],
 }
